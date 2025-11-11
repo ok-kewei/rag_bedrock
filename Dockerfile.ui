@@ -1,0 +1,16 @@
+# ---- Dockerfile.ui ----
+FROM python:3.10-slim
+
+WORKDIR /app
+COPY ./app /app
+
+# Install dependencies
+RUN pip install --no-cache-dir streamlit requests langchain_core
+
+EXPOSE 8501
+
+# Run Streamlit app
+CMD ["streamlit", "run", "streamlit_app/chat_ui.py", "--server.port=8501", "--server.address=0.0.0.0"]
+
+
+

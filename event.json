@@ -1,0 +1,18 @@
+{
+  "version": "2.0",
+  "routeKey": "POST /rag/query",
+  "rawPath": "/rag/query",
+  "rawQueryString": "",
+  "headers": { "content-type": "application/json" },
+  "requestContext": {
+    "http": {
+      "method": "POST",
+      "path": "/rag/query",
+      "protocol": "HTTP/1.1",
+      "sourceIp": "127.0.0.1",
+      "userAgent": "curl/7.68.0"
+    }
+  },
+  "body": "{\"question\":\"Hello\"}",
+  "isBase64Encoded": false
+}
