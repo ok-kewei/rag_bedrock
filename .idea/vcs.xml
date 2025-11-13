@@ -2,5 +2,12 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/infra/cdk.out/asset.179c68539702f101cff269451122c2a56b2839a9ec3855a1206d515714616869" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/infra/cdk.out/asset.3add99722dfc2f3ad0af4ebcd9c12eef3db507e1dc24631954e9e09e0a489780" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/infra/cdk.out/asset.4f350d04ecbdd92529fa0bce5a0b697705a941f12e2af2e54431c40369138def" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/infra/cdk.out/asset.6733e2bf5ab187555291fc9f0e845eed550dd67dfbd1598856d7d9df78e9a7a0" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/infra/cdk.out/asset.9765a88c33c9b558598d3dc8fe908efded125852d19983c7eeaffd702eefe70d" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/infra/cdk.out/asset.ea5beab33048421f7521ac92c01eef103097e2bf812a05b5a4ddf165f5a68526" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/rag_bedrock" vcs="Git" />
   </component>
 </project>

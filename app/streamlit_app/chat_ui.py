@@ -4,13 +4,18 @@
 import streamlit as st
 import requests
 from langchain_core.messages import AIMessage
+import os
 
 # FASTAPI_URL = "http://localhost:8000/rag/query"
-FASTAPI_URL = "https://b230kqcsv3.execute-api.us-east-1.amazonaws.com/prod/rag/query"
+FASTAPI_URL = os.getenv("FASTAPI_URL")
 
-st.set_page_config(page_title="RAG Chatbot + FastAPI", layout="centered")
-st.title("Bedrock RAG Chatbot")
-st.caption("Ask questions about documents stored in ./docs")
+st.set_page_config(page_title="Singapore Airlines FAQ RAG Chatbot", layout="centered")
+st.title("Singapore Airline FAQ Chatbot")
+st.caption(
+    """
+    Ask questions about Singapore Airlines FAQs. 
+    The answers are retrieved from documents stored in ./docs using AWS Bedrock and Claude Sonnet.
+    """)
 
 # @st.cache_resource
 # def get_rag_chain():

@@ -4,9 +4,20 @@ from fastapi import APIRouter, HTTPException
 from langchain_core.messages import AIMessage
 from pydantic import BaseModel
 from app.preprocessing.preprocessing import load_rag_chain
+from dotenv import load_dotenv
+import os
 
 router = APIRouter()
 rag_chain = load_rag_chain()
+
+#Load environment variables from .env
+load_dotenv()
+# Access environment variables
+LANGCHAIN_API_KEY = os.getenv("LANGCHAIN_API_KEY")
+LANGCHAIN_PROJECT = os.getenv("LANGCHAIN_PROJECT")
+
+print("LangSmith Project:", LANGCHAIN_PROJECT)
+
 
 class QueryRequest(BaseModel):
     question: str
