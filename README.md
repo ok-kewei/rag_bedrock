@@ -185,24 +185,67 @@ http://localhost:8000/docs
 
 ---
 
-## Deployment to AWS Lambda (Container Image)
+## Deployment to AWS Lambda with AWS CDK
+Instead of manually creating Lambda and ECR resources, I use AWS CDK to define cloud infrastructure with Python. This ensures consistent, repeatable deployments.
 
-### 1️ Tag & Push to ECR
-
-```bash
-aws ecr get-login-password --region ap-southeast-1 | docker login \
-    --username AWS --password-stdin <your-aws-account>.dkr.ecr.ap-southeast-1.amazonaws.com
-
-docker build -t rag-fastapi .
-docker tag rag-fastapi:latest <ecr-url>:latest
-docker push <ecr-url>:latest
+## CDK Deployment Workflow
+1. Create the infra directory  under the project and init a Python CDK app
+```
+mkdir -p infra
+cd infra
+cdk init app --language python
 ```
 
-### 2️ Deploy Lambda
+2. Create and activate a Python virtualenv (inside infra/)
+```
+python3 -m venv .venv
+source .venv/bin/activate   # macOS / Linux
+```
+3. Install CDK runtime libs
+```
+pip install --upgrade pip
+pip install aws-cdk-lib constructs
+```
+After cdk init, you’ll have a folder name,infra — e.g. infra/infra/infra_stack.py.
+Put infra_stack.py inside that package directory, it becomes infra/infra_stack.py 
 
-* In the AWS Console create a new Lambda, choose **Container image** and select your image from ECR.
-* Configure memory, timeout and environment variables in the Lambda Console.
-* Optionally create a Lambda Function URL (for public HTTP access) or put it behind API Gateway for auth, throttling and usage plans.
+Edit app.py (the CDK entrypoint) to import and instantiate your stack.
+
+Build your stack in infra_stack.py
+In infra_stack.py: 
+
+```
+class FastapiLambdaCdkStack(Stack):
+    def __init__(self, scope: Construct, id: str, **kwargs):
+        super().__init__(scope, id, **kwargs)
+
+        # Lambda from Docker image
+        docker_lambda = _lambda.DockerImageFunction(
+            self, "FastApiDockerLambda",
+            code=_lambda.DockerImageCode.from_image_asset("../",
+            file="Dockerfile.api",
+            exclude=[
+              "infra/cdk.out",  # CDK output
+              "infra/.venv",  # if CDK has its own venv
+              "venv",  # app venv
+              "*.md",  # README files
+              "*.bat",  # scripts like source.bat
+              "requirements-dev.txt"  # dev-only dependencies
+          ]), #custom Dockerfile name
+
+            timeout = Duration.seconds(120),
+            memory_size = 1024,
+        )
+```
+
+then in terminal 
+```
+cdk deploy
+```
+CDK will build the Docker image in Dockerfile.api, uploads it to ECR, and deploys a Lambda using that image.
+Once it run sucessfully, the AWS Lambda API will be created and the link look something like this https://<random>.execute-api.ap-southeast-1.amazonaws.com/prod/
+
+You can then add this link in .env as your FASTAPI DIR URL (production) to your frontend code. 
 
 ---
 
@@ -279,6 +322,7 @@ Visit LangSmith project: https://smith.langchain.com/
    Next.js (or similar frameworks) allows better UI customization, supports streaming responses, and scales well with multiple users.
 
 ---
+
 
 
 
