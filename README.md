@@ -58,7 +58,7 @@ This makes the chatbot fast, cost-efficient, and easy to deploy.
 
 ## Quick Start — Clone, Virtualenv, Install, Setup `.env`
 
-These are the local setup steps you asked for. Use these before running or building the Docker image (recommended for development).
+These are the local setup steps. Use these before running or building the Docker image (recommended for development).
 
 1. **Clone the repo**
 
@@ -322,6 +322,7 @@ Visit LangSmith project: https://smith.langchain.com/
    Next.js (or similar frameworks) allows better UI customization, supports streaming responses, and scales well with multiple users.
 
 ---
+
 
 
 
