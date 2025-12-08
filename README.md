@@ -40,10 +40,10 @@ This makes the chatbot fast, cost-efficient, and easy to deploy.
                └──────────┬────────┘
                           │ Calls RAG pipeline
                           ▼
-            ┌────────────────────────┐
+            ┌─────────────────────────┐
             │      Retriever          │
             │ (Embeddings + VectorDB) │
-            └──────────┬─────────────┘
+            └──────────┬──────────────┘
                        │ Top-k chunks
                        ▼
              ┌──────────────────────┐
@@ -52,7 +52,7 @@ This makes the chatbot fast, cost-efficient, and easy to deploy.
                         │ Final Answer
                         ▼
              ┌──────────────────────┐
-             │       FastAPI         │
+             │       FastAPI        │
              └──────────────────────┘
 
 
@@ -322,6 +322,7 @@ Visit LangSmith project: https://smith.langchain.com/
    Next.js (or similar frameworks) allows better UI customization, supports streaming responses, and scales well with multiple users.
 
 ---
+
 
 
 
